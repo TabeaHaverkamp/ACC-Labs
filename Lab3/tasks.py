@@ -32,7 +32,7 @@ def get_lines(directory):
     plt.xticks(range(len(pron_count)), list(pron_count.keys()))
     plt.savefig(directory + "plot")
     plt.show()
-    return pron_count    
+    return json.dumps(pron_count, sort_keys=True)
 
 
 
