@@ -3,9 +3,10 @@ import os
 import json
 import re
 
-broker_url = 'amqp://tabea:tabeapassword@localhost:5672/tabeavhost'
-#app = Celery('tasks', broker='broker_url')
-app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
+broker_url = 'pyamqp://tabea:tabeapassword@localhost:5672/tabeavhost'
+app = Celery('tasks', backend='rpc://', broker=broker_url)
+
+#app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
 
 @app.task
 def get_lines(directory):
