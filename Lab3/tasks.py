@@ -20,13 +20,27 @@ def add_dicts(dicts):
 @app.task
 def count_pronouns(directory):
     p = ["den", "det", "denna", "denne","han", "hon",  "hen"]
+    header = [count_in_file.s(directory + os.sep + filename, p) for filename in os.listdir(directory)]
+    callback = add_dicts.s()
+    job = group(count_in_file.s(directory + os.sep + filename, p) for filename in os.listdir(directory))()
+    return job
+    
+@app.task
+def count_in_file(filename, p):
     pron_count = {key: 0 for key in p}
-    for filename in os.listdir(directory):
-        with open(directory + os.sep + filename, "r") as file:
+    with open(filename, "r") as file:
             Lines = file.readlines() 
-            files_group = chord(group([count_in_line.s(line, p) for line in Lines])(), add_dicts.s()) 
-            
-
+            for line in Lines:
+                if line.strip(): # do not consider empty lines  
+                    # get the line as json file
+                    j = json.loads(line)
+                    # only consider non retweets
+                    if "retweeted_status" not in j:
+                        words = re.split('[. , ? !]', j['text'])
+                        for w in words: 
+                            if w.lower() in p: # if the word is a pronoun, add it to the count
+                                pron_count[w.lower()] += 1
+    return pron_count
 
 @app.task
 def count_in_line(line, p):

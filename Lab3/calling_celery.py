@@ -1,13 +1,15 @@
-from tasks import get_lines
-import celery
+from tasks import get_lines, count_pronouns
+from celery import group
 import time
-t = []
 
-def on_raw_message(body):
-    print(body)
-# [get_lines('/home/ubuntu/ACC-Labs/Lab3/data') for x in range(5)]
-job = celery.group([get_lines('/home/ubuntu/ACC-Labs/Lab3/data'), get_lines('/home/ubuntu/ACC-Labs/Lab3/data')])
-start = time.time()
-job_result = job.delay()
-results = job_result.get() # this will block until the tasks finish but it wont deadlock
-print(time.time()-start)
+dir = '/home/ubuntu/ACC-Labs/Lab3/data'
+# build groups to be executed
+#g = [get_lines.s('/home/ubuntu/ACC-Labs/Lab3/data') for x in range(5)]
+#job = group(g)
+
+#execute the group
+# job_result = job()
+job_result = count_pronouns.delay(dir)
+#print the result
+results = job_result.get() 
+print(results)
