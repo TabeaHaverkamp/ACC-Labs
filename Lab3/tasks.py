@@ -22,9 +22,10 @@ def count_pronouns(directory):
     p = ["den", "det", "denna", "denne","han", "hon",  "hen"]
     header = [count_in_file.s(directory + os.sep + filename, p) for filename in os.listdir(directory)]
     callback = add_dicts.s()
-    job = group(count_in_file.s(directory + os.sep + filename, p) for filename in os.listdir(directory))()
-    return job
-    
+    job = group(count_in_file.s(directory + os.sep + filename, p) for filename in os.listdir(directory))
+    job_result = job.apply_async()
+    return job_result
+
 @app.task
 def count_in_file(filename, p):
     pron_count = {key: 0 for key in p}
