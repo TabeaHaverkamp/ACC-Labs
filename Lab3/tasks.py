@@ -3,17 +3,15 @@ import os
 import json
 import re
 
-broker_url = 'pyamqp://tabea:tabeapassword@localhost:5672/tabeavhost'
-app = Celery('tasks', backend='rpc://', broker=broker_url)
+broker_url = 'amqp://tabea:tabeapassword@localhost:5672/tabeavhost'
+app = Celery('tasks', backend='rpc://', broker=broker_url )
 
-#app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
 
 @app.task
 def get_lines(directory):
     # create a dictionary to store the result
     p = ["den", "det", "denna", "denne","han", "hon",  "hen"]# "bajs", "trump", "sverige"]
     pron_count = {key: 0 for key in p}
-    
     for filename in os.listdir(directory):
         with open(directory + os.sep + filename, "r") as file:
             Lines = file.readlines() 
@@ -37,4 +35,3 @@ def get_lines(directory):
 
 
 
-            
