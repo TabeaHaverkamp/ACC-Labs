@@ -19,7 +19,7 @@ def add_dicts(dicts):
 @app.task
 def count_in_file(filename, p):
     pron_count = {key: 0 for key in p}
-    with tweet_file as open(filename):
+    with open(filename) as tweet_file:
         tweets = (line.rstrip() for line in tweet_file)
         tweets_json = (json.loads(line) for line in tweets if line)
 
