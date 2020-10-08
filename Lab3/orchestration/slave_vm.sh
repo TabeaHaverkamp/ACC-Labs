@@ -4,7 +4,7 @@ echo "This slave is alive!"
 
 echo "Mounting the data..."
 sudo mkdir /mnt/tweet_data
-sudo mount /dev/vdb1 /mnt/tweet_data
+sudo mount /dev/vdb /mnt/tweet_data
 sudo chown ubuntu:ubuntu /mnt/tweet_data
 
 sudo apt-get update -y
