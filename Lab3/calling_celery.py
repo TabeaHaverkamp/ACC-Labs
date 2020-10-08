@@ -1,9 +1,9 @@
-from tasks import get_lines, count_pronouns, count_in_file
+from tasks import count_in_file
 from celery import group
 import time
 import os
 
-# celery worker -A tasks --loglevel=INFO -n worker1@%h --autoscale=10,3
+# celery worker -A tasks --loglevel=INFO -n worker1@%h --autoscale=10,3 --without-gossip --max-memory-per-child 100
 # sudo pkill -9 -f 'celery worker'
 def add_dicts(dicts):
     dd = {}
