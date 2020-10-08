@@ -35,6 +35,7 @@ def main():
         end = time.time()-start
         times.append(end)
         print(end)
+    print(times)
 
 
 main()
