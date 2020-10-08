@@ -1,9 +1,9 @@
-from tasks import count_in_file
+from tasks import count_in_file#, add_dicts
 from celery import group
 import time
 import os
 
-# celery worker -A tasks --loglevel=INFO -n worker1@%h --autoscale=10,3 --without-gossip --max-memory-per-child 100
+# celery -A tasks worker --loglevel=INFO -n worker1@%h --autoscale=10,3 --max-memory-per-child 100
 # sudo pkill -9 -f 'celery worker'
 def add_dicts(dicts):
     dd = {}
@@ -15,27 +15,27 @@ def add_dicts(dicts):
 
 
 def main():
-    directory = '/home/ubuntu/ACC-Labs/Lab3/data'
+    directory = '/mnt/tweet_data/tweet_data'
     p = ["den", "det", "denna", "denne","han", "hon",  "hen"]
-    print("3 workers")
+    #print("3 workers")
     times = []
-    for i in range(5):
+    for i in range(1):
         job = []
         for filename in os.listdir(directory):
             job.append(count_in_file.delay(directory + os.sep + filename, p))
         #job_result = job.apply_async()
         start = time.time()
-        #job_result = count_pronouns(dir)
-        #print the result
+
         results = []
         for job_result in job:
             results.append(job_result.get())
-            #print(results) 
+
+        #print(time.time()- start)
+
         print(add_dicts(results))
         end = time.time()-start
         times.append(end)
-        print(end)
+        #print(end)
     print(times)
-
 
 main()
