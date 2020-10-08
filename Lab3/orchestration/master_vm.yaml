@@ -155,7 +155,7 @@ resources:
           name: tabea_slave%index%
           key: {get_resource: main_key}
           master_ip: {
-            get_attr: [main_server, addresses, get_attr: [main_network, name], 0, addr]
+            get_attr: [main_server, addresses, get_attr: [main_network, name], 1, addr]
           }
 
 # Outputs
@@ -164,6 +164,6 @@ outputs:
     description: Information
     value: { get_attr: [main_server, show] }
 
-  floating_ip:
-    description: The floating IP address of the instance
-    value: { get_attr: [main_server, addresses, get_attr: [main_network, name], 1, addr] }
+#  floating_ip:
+#    description: The floating IP address of the instance
+#    value: { get_attr: [main_server, addresses, get_attr: [main_network, name], 1, addr] }

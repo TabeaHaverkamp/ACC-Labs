@@ -53,6 +53,7 @@ sudo screen -S celeryserver -d -m bash -c 'celery flower -A tasks --port=5000'
 echo "Starting the celery server..."
 sudo screen -S celeryserver -d -m bash -c 'cd /home/ubuntu/ACC-Labs/Lab3/ && celery -A tasks worker --loglevel=INFO -n worker1@%h --autoscale=10,3 --max-memory-per-child 100'
 
-echo "todoooo"
+echo "start the app"
+sudo screen -S celeryserver -d -m bash -c 'cd /home/ubuntu/ACC-Labs/Lab3/ && python3 flask_app.py'
 
 echo "Initialization complete!"
