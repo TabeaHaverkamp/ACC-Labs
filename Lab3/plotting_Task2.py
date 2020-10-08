@@ -23,7 +23,7 @@ for key,vals in ex_time_onevm.items():
 ex_time = {}
 
 ex_time['3'] = [107.86399292945862, 106.49290800094604, 107.8594696521759, 97.92719960212708, 102.66747426986694]
-
+ex_time['7'] = [103.4112069606781,98.1205005645752,99.53335642814636,102.6190447807312,105.04641652107239] 
 plt.plot(*zip(*avg.items()),  c='red', label = 'average execution time')
 plt.plot(*zip(*ex_time_onevm.items()), '+', c='grey')
 plt.ylabel("seconds")
