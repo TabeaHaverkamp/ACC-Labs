@@ -28,7 +28,9 @@ def main():
 
         results = []
         for job_result in job:
-            results.append(job_result.get())
+            jb = job_result.get()
+            print(jb)
+            results.append(jb)
 
         #print(time.time()- start)
 
