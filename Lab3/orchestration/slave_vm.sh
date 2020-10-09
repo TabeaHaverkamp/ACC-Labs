@@ -22,7 +22,7 @@ echo "Installing Tabea's code..."
 cd /home/ubuntu
 sudo git clone https://github.com/TabeaHaverkamp/ACC-Labs.git
 cd /home/ubuntu/ACC-Labs/Lab3/
-sudo git checkout concurrent
+sudo git checkout master
 
 echo "Setting permission"
 sudo chown -R ubuntu.users /home/ubuntu/ACC-Labs
