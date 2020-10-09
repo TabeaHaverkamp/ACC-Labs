@@ -18,6 +18,7 @@ def add_dicts(dicts):
 
 @app.task
 def count_in_file(filename, p):
+    start = time.time()
     pron_count = {key: 0 for key in p}
     with open(filename) as tweet_file:
         tweets = (line.rstrip() for line in tweet_file)
@@ -30,4 +31,4 @@ def count_in_file(filename, p):
                 for w in words: 
                     if w.lower() in p: # if the word is a pronoun, add it to the count
                         pron_count[w.lower()] += 1
-    return pron_count
+    return [time.time()-start, pron_count]

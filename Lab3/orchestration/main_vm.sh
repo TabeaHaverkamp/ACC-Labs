@@ -29,7 +29,7 @@ echo "PRIVATE_KEY" > /home/ubuntu/.ssh/id_rsa
 echo "PUBLIC KEY" > /home/ubuntu/.ssh/id_rsa.pub
 
 echo "Installing celery..."
-sudo -H pip3 install celery
+sudo -H pip3 install celery==4.4
 
 echo "Installing flower..."
 sudo -H pip3 install flower
@@ -48,7 +48,7 @@ echo "Setting permission"
 sudo chown -R ubuntu.users /home/ubuntu/ACC-Labs
 
 echo "Starting flower..."
-sudo screen -S celeryserver -d -m bash -c 'celery flower -A tasks --port=5000'
+sudo screen -S celeryserver -d -m bash -c 'cd /home/ubuntu/ACC-Labs/Lab3/ && celery flower -A tasks --port=5000'
 
 echo "Starting the celery server..."
 sudo screen -S celeryserver -d -m bash -c 'cd /home/ubuntu/ACC-Labs/Lab3/ && celery -A tasks worker --loglevel=INFO -n worker1@%h --autoscale=10,3 --max-memory-per-child 100'

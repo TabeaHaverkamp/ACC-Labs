@@ -15,7 +15,7 @@ sudo apt-get install -y python3-pip
 sudo -H pip3 install --upgrade pip
 
 echo "Installing celery, flasp..."
-sudo -H pip3 install celery
+sudo -H pip3 install celery==4.4 #celery needs to be lower than 5.0.0 for flower to work.
 sudo -H pip3 install Flask
 
 echo "Installing Tabea's code..."

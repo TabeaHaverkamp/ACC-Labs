@@ -16,9 +16,11 @@ def add_dicts(dicts):
 
 def main():
     directory = '/mnt/tweet_data/tweet_data'
+    #directory = '/home/ubuntu/ACC-Labs/Lab3/data'
     p = ["den", "det", "denna", "denne","han", "hon",  "hen"]
     #print("3 workers")
     times = []
+    itimes = []
     for i in range(5):
         job = []
         for filename in os.listdir(directory):
@@ -27,17 +29,21 @@ def main():
         start = time.time()
 
         results = []
+        individual_times = []
         for job_result in job:
             jb = job_result.get()
             print(jb)
-            results.append(jb)
+            results.append(jb[1])
+            individual_times.append(jb[0])
 
         #print(time.time()- start)
-
+        print(f" sume of individual times added up: {sum(individual_times)}")
         print(add_dicts(results))
         end = time.time()-start
         times.append(end)
+        itimes.appen(sum(individual_times))
         #print(end)
     print(times)
+    print(itimes)
 
 main()
