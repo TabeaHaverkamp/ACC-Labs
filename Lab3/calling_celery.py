@@ -19,7 +19,7 @@ def main():
     p = ["den", "det", "denna", "denne","han", "hon",  "hen"]
     #print("3 workers")
     times = []
-    for i in range(1):
+    for i in range(5):
         job = []
         for filename in os.listdir(directory):
             job.append(count_in_file.delay(directory + os.sep + filename, p))
