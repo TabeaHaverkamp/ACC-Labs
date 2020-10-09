@@ -29,7 +29,7 @@ echo "PRIVATE_KEY" > /home/ubuntu/.ssh/id_rsa
 echo "PUBLIC KEY" > /home/ubuntu/.ssh/id_rsa.pub
 
 echo "Installing celery..."
-sudo -H pip3 install celery==4.4
+sudo -H pip3 install celery
 
 echo "Installing flower..."
 sudo -H pip3 install flower
